@@ -1,0 +1,16 @@
+{
+  "id": "./",
+  "name": "Confessions Trường THCS & THPT Ngã Sáu",
+  "short_name": "Confessions Ngã Sáu",
+  "description": "Góc chia sẻ và bảng tin Confessions Trường THCS & THPT Ngã Sáu.",
+  "lang": "vi",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f8fafc",
+  "theme_color": "#6d5dfc",
+  "icons": [
+    { "src": "./assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

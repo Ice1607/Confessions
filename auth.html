@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6d5dfc"><title>Tài khoản | Confessions Ngã Sáu</title>
+  <link rel="manifest" href="./manifest.json"><link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="./styles.css"><script defer src="./app.js"></script>
+</head>
+<body data-page="auth" class="min-h-screen bg-slate-50 text-slate-800">
+  <main class="mx-auto flex min-h-screen max-w-6xl items-center justify-center px-4 py-10">
+    <div class="grid w-full max-w-4xl overflow-hidden rounded-[2rem] bg-white shadow-soft md:grid-cols-2">
+      <section class="hero-gradient flex flex-col justify-between p-8 text-white sm:p-10">
+        <a href="./index.html" class="text-sm font-bold text-white/85">← Về bảng tin</a>
+        <div class="py-12"><img src="./assets/icon.svg" alt="" class="mb-6 h-16 w-16 rounded-2xl"><h1 class="text-3xl font-black leading-tight">Một tài khoản,<br>thêm một kết nối.</h1><p class="mt-4 text-sm leading-7 text-white/80">Đăng nhập để gửi confession, bình luận và cùng xây dựng cộng đồng học đường tích cực.</p></div>
+        <p class="text-xs text-white/60">Confessions · THCS &amp; THPT Ngã Sáu</p>
+      </section>
+      <section class="p-7 sm:p-10">
+        <div class="mb-6 flex rounded-2xl bg-slate-100 p-1">
+          <button id="loginTab" class="flex-1 rounded-xl bg-white px-3 py-2.5 text-sm font-extrabold text-brand-700 shadow-sm">Đăng nhập</button>
+          <button id="signupTab" class="flex-1 rounded-xl px-3 py-2.5 text-sm font-bold text-slate-500">Đăng ký</button>
+        </div>
+        <h2 id="authTitle" class="text-2xl font-black">Chào mừng trở lại!</h2><p id="authSubtitle" class="mt-2 text-sm text-slate-500">Đăng nhập bằng email và mật khẩu của bạn.</p>
+        <form id="authForm" class="mt-7 space-y-4">
+          <label id="nameField" class="hidden block text-sm font-bold">Họ và tên<input id="fullName" type="text" autocomplete="name" maxlength="120" class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-100" placeholder="Nguyễn Văn A"></label>
+          <label class="block text-sm font-bold">Email<input id="email" type="email" required autocomplete="email" class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-100" placeholder="ban@example.com"></label>
+          <label class="block text-sm font-bold">Mật khẩu<input id="password" type="password" required minlength="6" autocomplete="current-password" class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-100" placeholder="Ít nhất 6 ký tự"></label>
+          <button id="authSubmit" type="submit" class="w-full rounded-xl bg-brand-600 px-4 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-brand-600/20 hover:bg-brand-700">Đăng nhập</button>
+          <p id="authMessage" class="hidden rounded-xl p-3 text-sm" role="status"></p>
+        </form>
+        <p class="mt-6 text-center text-xs leading-5 text-slate-400">Khi đăng ký, bạn đồng ý sử dụng nền tảng một cách văn minh, tôn trọng và không chia sẻ thông tin gây tổn hại đến người khác.</p>
+      </section>
+    </div>
+  </main><div id="toast" class="toast" role="status"></div>
+</body>
+</html>

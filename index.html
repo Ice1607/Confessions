@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#6d5dfc">
+  <meta name="description" content="Bảng tin Confessions Trường THCS & THPT Ngã Sáu. Chia sẻ suy nghĩ, kết nối và lan tỏa điều tích cực.">
+  <title>Confessions | THCS & THPT Ngã Sáu</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icon.svg">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { brand: { 50:'#f2f0ff',100:'#e8e4ff',500:'#7667ff',600:'#6554ee',700:'#5142cf' } }, boxShadow: { soft:'0 18px 55px rgba(41, 36, 95, .10)' } } } };
+  </script>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body data-page="feed" class="min-h-screen bg-slate-50 text-slate-800">
+  <header class="sticky top-0 z-40 border-b border-white/70 bg-white/85 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6">
+      <a href="./index.html" class="flex min-w-0 items-center gap-3">
+        <img src="./assets/icon.svg" class="h-11 w-11 rounded-2xl" alt="Logo Confessions">
+        <span class="min-w-0"><strong class="block truncate text-sm font-black sm:text-base">Confessions Ngã Sáu</strong><small class="block text-xs text-slate-500">THCS &amp; THPT Ngã Sáu</small></span>
+      </a>
+      <div class="flex items-center gap-2">
+        <a href="./admin.html" id="adminNav" class="hidden rounded-xl px-3 py-2 text-sm font-semibold text-brand-700 hover:bg-brand-50">Quản trị</a>
+        <a href="./auth.html" id="authNav" class="rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-brand-600/20 hover:bg-brand-700">Đăng nhập</a>
+        <button id="logoutBtn" class="hidden rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-semibold hover:bg-slate-100">Đăng xuất</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-4 py-8 sm:px-6">
+    <section class="hero-gradient relative overflow-hidden rounded-[2rem] px-6 py-10 text-white shadow-soft sm:px-10 sm:py-14">
+      <div class="relative z-10 max-w-2xl">
+        <span class="mb-4 inline-flex rounded-full border border-white/25 bg-white/15 px-3 py-1 text-xs font-bold tracking-wide">GÓC CHIA SẺ HỌC ĐƯỜNG</span>
+        <h1 class="text-3xl font-black leading-tight sm:text-5xl">Điều bạn muốn nói,<br>Tổ Kiến sẽ lắng nghe. 💜</h1>
+        <p class="mt-4 max-w-xl text-sm leading-7 text-white/85 sm:text-base">Một nơi để tâm sự, đòi nợ, không lắng nghe những đứa gây war nhaaa:)).</p>
+        <a href="#sendBox" class="mt-7 inline-flex rounded-2xl bg-white px-5 py-3 text-sm font-extrabold text-brand-700 shadow-lg transition hover:-translate-y-0.5">Gửi confession <span class="ml-2">✍️</span></a>
+      </div>
+      <div class="pointer-events-none absolute -right-12 -top-20 h-72 w-72 rounded-full border-[35px] border-white/10"></div>
+      <div class="pointer-events-none absolute -bottom-32 right-28 h-64 w-64 rounded-full bg-fuchsia-300/20 blur-3xl"></div>
+    </section>
+
+    <section id="sendBox" class="mt-8 grid gap-6 lg:grid-cols-[.9fr_1.1fr]">
+      <div class="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft sm:p-7">
+        <div class="mb-5">
+          <p class="text-xs font-extrabold uppercase tracking-[.18em] text-brand-600">Gửi lời nhắn</p>
+          <h2 class="mt-2 text-2xl font-black">Bạn muốn chia sẻ điều gì?</h2>
+          <p class="mt-2 text-sm leading-6 text-slate-500">Bài viết sẽ được quản trị viên xem xét trước khi xuất hiện trên bảng tin.</p>
+        </div>
+        <form id="confessionForm" class="space-y-4">
+          <label class="block text-sm font-bold">Nội dung confession
+            <textarea id="confessionContent" required minlength="3" maxlength="5000" rows="6" placeholder="Viết điều bạn muốn gửi gắm..." class="mt-2 w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm outline-none transition focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-100"></textarea>
+          </label>
+          <label class="flex cursor-pointer items-start gap-3 rounded-2xl bg-brand-50 p-4 text-sm">
+            <input id="anonymousToggle" type="checkbox" checked disabled class="mt-1 h-4 w-4 accent-brand-600">
+            <span><strong class="block">Ẩn danh công khai (luôn bật)</strong><span class="mt-1 block text-xs leading-5 text-slate-500">Tên và email vẫn được lưu riêng để quản trị viên xử lý; bảng tin không công khai danh tính người gửi.</span></span>
+          </label>
+          <p id="sendHint" class="text-xs text-slate-500">Bạn cần đăng nhập để gửi confession.</p>
+          <button type="submit" class="w-full rounded-2xl bg-brand-600 px-5 py-3.5 text-sm font-extrabold text-white shadow-lg shadow-brand-600/20 transition hover:bg-brand-700 disabled:cursor-not-allowed disabled:opacity-50">Gửi để duyệt <span class="ml-1">➜</span></button>
+          <p id="sendMessage" class="hidden rounded-xl p-3 text-sm" role="status"></p>
+        </form>
+      </div>
+      <div class="rounded-3xl border border-slate-100 bg-white p-6 shadow-soft sm:p-7">
+        <div class="flex items-end justify-between gap-3">
+          <div><p class="text-xs font-extrabold uppercase tracking-[.18em] text-brand-600">Bảng tin</p><h2 class="mt-2 text-2xl font-black">Lời nhắn mới nhất</h2></div>
+          <button id="refreshFeed" class="rounded-xl border border-slate-200 px-3 py-2 text-xs font-bold hover:bg-slate-50">↻ Làm mới</button>
+        </div>
+        <div id="feedList" class="mt-5 space-y-6">
+          <div class="skeleton h-28 rounded-2xl"></div><div class="skeleton h-28 rounded-2xl"></div>
+        </div>
+      </div>
+    </section>
+    <footer class="py-10 text-center text-xs text-slate-400">Confessions Trường THCS &amp; THPT Ngã Sáu · Lan tỏa sự tử tế 💜</footer>
+  </main>
+  <div id="toast" class="toast" role="status"></div>
+</body>
+</html>
